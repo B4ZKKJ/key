@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reivindicar  Key</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+</head>
+<body>
+    <div class="container mt-5 text-center">
+        <h2>Resgatar Key</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="search-key">Chave Aleatória:</label>
+                <input type="text" class="form-control" name="key" autocomplete="off" required>
+            </div>
+            <button class="btn btn-primary mt-2" onclick="consultarChave()">Consultar</button>
+            {% csrf_token %}
+        </form>
+        
+        
+        {% if validar == '1' %}
+            
+            {% for k in keyV %}
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        Swal.fire({
+                            title: 'Key Valida!',
+                            text: '{{ k.link }}',
+                            icon: 'success',
+                            confirmButtonText: 'Fechar',
+                            customClass: {
+                                container: 'custom-swal-alert'
+                            }
+                        });
+                    });
+                </script>
+            {% endfor %}
+                
+        {% elif validar == '0' %}
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: 'Key inválida!',
+                        text: ':(',
+                        icon: 'error',
+                        confirmButtonText: 'Fechar',
+                        customClass: {
+                            container: 'custom-swal-alert'
+                        }
+                    });
+                });
+            </script>
+        {% else %}
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</body>
+</html>
